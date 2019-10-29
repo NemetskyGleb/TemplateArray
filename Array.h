@@ -225,3 +225,8 @@ template <typename T> std::istream& operator>>(std::istream& r, Array<T>& A){
 	std::cin.get();
 	return r;
 }
+/* TODO:
+	Add Support of Type Conversion(double = int and etc)
+*/
+// Exception in method Array::operator-(int key) 
+// key is not exist in array

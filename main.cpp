@@ -9,7 +9,7 @@ int main(){
 	Array<double> arr3;
 	std::cout << "Testing methods of class Array: " << std::endl;
 	std::cout << "double Array2 = " << arr2;
-	std::cout << "Empty Array3 = ; " << arr3;
+	std::cout << "Empty Array3 =  " << arr3;
 	arr3 = arr2;
 	std::cout << "Empty Array3 = Array1 = " << arr3;
 	std::cout << "Array3[0] = " << arr3[0] << std::endl;
@@ -18,11 +18,13 @@ int main(){
 	std::cout << "Add number 10 in Array3: " << arr3;
 	arr3 += arr2;
 	std::cout << "Add Array2 to Array3 : " << arr3;
-	arr3 = arr3 - 2;
-	std::cout << "Delete number 2 from Array3: " << arr3;
+	arr3 = arr3 - 1.1;
+	std::cout << "Delete number 1.1 from Array3: " << arr3;
 	std::cout.setf(std::ios::boolalpha);
 	bool res = (arr3 == arr2);
 	std::cout << "Is Array3 = Array2 - " << res << std::endl;
+	res = (arr3 != arr2);
+	std::cout << "Is Array3 != Array2 - " << res << std::endl;
 	std::cout << "Max index in Array3: " << arr3.Max() << std::endl;
 	std::cout << "Min index in Array3 " << arr3.Min() << std::endl;
 	arr3.Sorting();
