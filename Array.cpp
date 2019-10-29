@@ -2,7 +2,7 @@
 namespace ARRAY{
 Array::Array(){
 	a = new int[1];
-	int n = 1;
+	n = 1;
 }
 Array::Array(int m){
 		a = new int[m];
@@ -169,15 +169,6 @@ int Array::Min(){
 		}
 	}
 	return mini;
-}
-System::String^ Array::GetArr(){
-	System::String^ Arr;
-	for (int i = 0; i < n; i++){
-		//if (i == 15) Arr += i.ToString() + System::Environment::NewLine;
-		if (i == (n - 1)) Arr = Arr + System::Convert::ToString(a[i]);
-		else Arr = Arr + System::Convert::ToString(a[i]) + ",";
-	}
-	return Arr;
 }
 std::ostream& operator<<(std::ostream& r, Array& T){
 	for (int i = 0; i < T.n; ++i)
