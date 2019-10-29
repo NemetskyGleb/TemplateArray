@@ -1,70 +1,79 @@
 #include "Array.h"
 namespace ARRAY{
-Array::Array(){
-	a = new int[1];
+template <typename T>
+Array<T>::Array(){
+	a = new T[1];
 	n = 1;
 }
-Array::Array(int m){
-		a = new int[m];
+template <typename T>
+Array<T>::Array(int m){
+		a = new T[m];
 		n = m;
 	}
-Array::Array (int *x , int m){
+template <typename T>
+Array<T>::Array (T* x, int m){
 	n = m;
-	a = new int[n];
+	a = new T[n];
 	for (int i = 0; i < n; ++i)
 	{
 		a[i] = x[i];
 	}
 }
-
-Array::Array(const Array& T){
-	n = T.n;
-	a = new int[n];
+template <typename T>
+Array<T>::Array(const Array& A){
+	n = A.n;
+	a = new T[n];
 	for (int i = 0; i < n; ++i)
 	{
-		a[i] = T.a[i];
+		a[i] = A.a[i];
 	}
 }
-Array& Array::operator=(const Array& T){
-	if(this != &T){
-		if(n != T.n){
+template <typename T>
+Array<T>& Array<T>::operator=(const Array& A){
+	if(this != &A){
+		if(n != A.n){
 			delete[] a;
-			n = T.n;
-			a = new int[n];
+			n = A.n;
+			a = new T[n];
 		}
 		for (int i = 0; i < n; ++i)
 		{
-			a[i] = T.a[i];
+			a[i] = A.a[i];
 		}
 	}
 	return *this;
 }
-Array::~Array(){
+template <typename T>
+Array<T>::~Array(){
 	delete[] a;
 }
-int& Array::operator[](int pos){
+template <typename T>
+T& Array<T>::operator[](T pos){
 	if (pos < 0 || pos > n){
 		std::cout << "Incorrect position. Return a[0]\n";
 		return a[0];
 	}
 	return a[pos];
 }
-Array Array::operator+(const Array& T){
-	int m = n + T.n;
+template <typename T>
+Array<T> Array<T>::operator+(const Array& A){
+	int m = n + A.n;
 	Array temp(m);
 	for (int i = 0; i < n; i++){
 		temp.a[i] = a[i];
 	}
 	for(int i = n, k = 0; i < m; i++, k++){
-		temp.a[i] = T.a[k];
+		temp.a[i] = A.a[k];
 	}
 	return temp;
 }
-Array& Array::operator+=(const Array& T){
-	return *this = *this + T;
+template <typename T>
+Array<T>& Array<T>::operator+=(const Array& A){
+	return *this = *this + A;
 }
-Array& Array::operator+=(int key){
-	int *t = new int[n + 1];
+template <typename T>
+Array<T>& Array<T>::operator+=(T key){
+	T *t = new T[n + 1];
 	for (int i = 0; i < n; ++i)
 	{
 		t[i] = a[i];
@@ -75,7 +84,8 @@ Array& Array::operator+=(int key){
 	a = t;
 	return *this;
 }
-Array Array::operator+(int key){
+template <typename T>
+Array<T> Array<T>::operator+(T key){
 	Array Res(n + 1);
 	for (int i = 0; i < n; ++i)
 	{
@@ -84,9 +94,10 @@ Array Array::operator+(int key){
 	Res.a[n] = key;
 	return Res;
 }
-Array Array::operator-(int key){
+template <typename T>
+Array<T> Array<T>::operator-(T key){
 	Array Res(n-1);
-	int k = Find(key);
+	T k = Find(key);
 	if (k >= 0){
 		for(int i = 0; i < k; i++){
 			Res.a[i] = a[i];
@@ -101,38 +112,42 @@ Array Array::operator-(int key){
 		return *this;
 	}
 }
-Array& Array::operator-=(int key){
+template <typename T>
+Array<T>& Array<T>::operator-=(T key){
 	return *this = *this - key;
 }
-bool Array::operator==(const Array& T){
+template <typename T>
+bool Array<T>::operator==(const Array& A){
 	for (int i = 0; i < n; i++)
-		if (a[i] != T.a[i])
+		if (a[i] != A.a[i])
 			return false;
 	return true;
 }
-bool Array::operator!=(const Array& T){
+template <typename T>
+bool Array<T>::operator!=(const Array& A){
 	for (int i = 0; i < n; i++)
-		if (a[i] == T.a[i])
+		if (a[i] == A.a[i])
 			return true;
 	return false;
 }
-void Array::Sorting(){
-	  int left = 0, right = n - 1;
+template <typename T>
+void Array<T>::Sorting(){
+	  T left = 0, right = n - 1;
   bool flag = true;
   while (flag && (left < right)) {
     flag = false;
-    for (int i = left; i < right; ++i) {
+    for (T i = left; i < right; ++i) {
       if (a[i] > a[i + 1]) {
-        int temp = a[i];
+        T temp = a[i];
         a[i] = a[i + 1];
         a[i + 1] = temp;
         flag = true;
       }
     }
     right--;
-    for (int i = right; i > left; --i) {
+    for (T i = right; i > left; --i) {
       if (a[i] < a[i - 1]) {
-        int temp = a[i];
+        T temp = a[i];
         a[i] = a[i - 1];
         a[i - 1] = temp;
         flag = true;
@@ -141,16 +156,18 @@ void Array::Sorting(){
     left++;
   }
 }
-int Array::Find(int key){
+template <typename T>
+T Array<T>::Find(T key){
 	for (int i = 0; i < n; i++){
 		if (a[i] == key)
 			return i;
 	}
 	return -1;
 }
-int Array::Max(){
-	int maxi = 0;
-	int max = a[0];
+template <typename T>
+T Array<T>::Max(){
+	T maxi = 0;
+	T max = a[0];
 	for (int i = 1; i < n; i++){
 		if (a[i] > max){
 			max = a[i];
@@ -159,9 +176,10 @@ int Array::Max(){
 	}
 	return maxi;
 }
-int Array::Min(){
-	int mini = 0;
-	int min = a[0];
+template <typename T>
+T Array<T>::Min(){
+	T mini = 0;
+	T min = a[0];
 	for (int i = 1; i < n; i++){
 		if (a[i] < min){
 			min = a[i];
@@ -170,28 +188,30 @@ int Array::Min(){
 	}
 	return mini;
 }
-std::ostream& operator<<(std::ostream& r, Array& T){
-	for (int i = 0; i < T.n; ++i)
+template <typename T>
+std::ostream& operator<<(std::ostream& r, Array<T>& A){
+	for (int i = 0; i < A.n; ++i)
 	{
-		if(i == (T.n - 1)) std::cout << T.a[i];
-		else r << T.a[i] << ", ";
+		if(i == (A.n - 1)) std::cout << A.a[i];
+		else r << A.a[i] << ", ";
 	}
 	std::cout << std::endl;
 	return r;
 }
-std::istream& operator>>(std::istream& r, Array& T){
+template <typename T>
+std::istream& operator>>(std::istream& r, Array<T>& A){
 	int m;
 	std::cout << "Enter the number of array elements: \n";
 	std::cin >> m;
-	if (T.n != m){
-		delete[] T.a;
-		T.n = m;
-		T.a = new int[m];
+	if (A.n != m){
+		delete[] A.a;
+		A.n = m;
+		A.a = new T[m];
 	}
 	std::cout << "Enter " << m << "elements\n";
-	for (int i = 0; i < T.n; ++i)
+	for (int i = 0; i < A.n; ++i)
 	{
-		r >> T.a[i];
+		r >> A.a[i];
 	}
 	return r;
 }
