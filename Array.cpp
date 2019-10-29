@@ -1,10 +1,11 @@
 #include "Array.h"
-namespace ARRAY{
+#include <iostream>
 template <typename T>
 Array<T>::Array(){
 	a = new T[1];
 	n = 1;
 }
+/*
 template <typename T>
 Array<T>::Array(int m){
 		a = new T[m];
@@ -43,10 +44,12 @@ Array<T>& Array<T>::operator=(const Array& A){
 	}
 	return *this;
 }
+*/
 template <typename T>
 Array<T>::~Array(){
 	delete[] a;
 }
+/*
 template <typename T>
 T& Array<T>::operator[](T pos){
 	if (pos < 0 || pos > n){
@@ -215,6 +218,6 @@ std::istream& operator>>(std::istream& r, Array<T>& A){
 	}
 	return r;
 }
-}
+*/
 // Exception in method Array::operator-(int key) 
 // key is not exist in array
